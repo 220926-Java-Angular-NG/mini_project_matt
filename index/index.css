@@ -1,0 +1,23 @@
+body{
+    background-image: url("../background.jpg");
+    background-size: cover;
+}
+h1{
+    text-align: center;
+    color:oldlace;
+}
+button{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.sign-in{
+    text-align: right;
+    color:indigo;
+    padding-right: 100px;
+}
+.sign-up{
+    visibility: hidden;
+    text-align: center;
+    background-color: blanchedalmond;
+    color:chocolate;
+}

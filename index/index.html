@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script>
+        function myFunction() {
+            var x = document.getElementById("sign-up");
+            if (x.style.visibility == "hidden") {
+                x.style.visibility = "visible";
+            } else {
+                x.style.visibility = "hidden";
+            }
+        }
+    </script>
+    <title>The STARS</title>
+</head>
+<body>
+    <br>
+    <h1>Welcome to the STARS!</h3>
+    <div id = "sign-in" class = "sign-in">
+        <form>
+            <label>Email: </label>
+            <input id="email" type="text">
+            <br>
+            <br>
+            <label>Password: </label>
+            <input id="pass" type="password">
+            <br>
+            <br>
+
+            <button id="login" type="submit">Log In</button>
+            <button id="new" type="button" onclick="myFunction()">New User</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="sign-up" class = "sign-up">
+        <form >
+            <label>Email: </label>
+            <input id="email-signup" type="text">
+            <label id="email-error"></label>
+            <br>    
+            <label>First Name: </label>
+            <input id="fname" type="text">
+            <br>
+            <label>Last Name: </label>
+            <input id="lname" type="text">
+            <br>
+            <label>Birthday: </label>
+            <input id="bdate" type="date">
+            <br>
+            <button id="submit" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
