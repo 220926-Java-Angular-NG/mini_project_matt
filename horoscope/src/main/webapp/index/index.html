@@ -8,7 +8,7 @@
     <script>
         function myFunction() {
             var x = document.getElementById("sign-up");
-            if (x.style.visibility == "hidden") {
+            if (x.style.visibility == "hidden" || !x.style.visibility) {
                 x.style.visibility = "visible";
             } else {
                 x.style.visibility = "hidden";
@@ -20,6 +20,7 @@
 <body>
     <br>
     <h1>Welcome to the STARS!</h3>
+
     <div id = "sign-in" class = "sign-in">
         <form>
             <label>Email: </label>
@@ -34,6 +35,8 @@
             <button id="login" type="submit">Log In</button>
             <button id="new" type="button" onclick="myFunction()">New User</button>
         </form>
+        <br>
+        <label id="login-error"></label>
     </div>
     <br>
     <br>

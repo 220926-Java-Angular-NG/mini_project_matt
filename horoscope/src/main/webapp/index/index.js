@@ -4,6 +4,8 @@ bdate.setAttribute("max", new Date().toLocaleDateString('en-ca'));
 let loginButton = document.getElementById("login")
 loginButton.addEventListener('click', async(event)=>{
     event.preventDefault();
+    let loginErrorLab=document.getElementById("login-error")
+    loginErrorLab.innerHTML = "";
 
     let email = document.getElementById("email").value;
     let pass = document.getElementById("pass").value;
@@ -31,16 +33,24 @@ loginButton.addEventListener('click', async(event)=>{
             let loggedInUser = JSON.stringify(data)
     
             localStorage.setItem("currentUser",loggedInUser)
-            console.log(loggedInUser);
             
         })
+
     
         setTimeout( ()=>{
-            window.location.replace("home.html")
+            window.location.replace("../home/home.html")
         }, 1000 )
     
     
     }catch(error){
+        if (error=="Error: 406"){
+            loginErrorLab.innerHTML = "Email/password combo does not match."
+        } else if (error== "Error: 404"){
+            loginErrorLab.innerHTML = "Email not registered."
+        } else if (error=="Error:400"){
+            loginErrorLab.innerHTML="Character tokens not accepted"
+        }
+
         console.log(error)
     }
 
@@ -49,6 +59,8 @@ loginButton.addEventListener('click', async(event)=>{
 let newUserButton = document.getElementById("newUser")
 newUserButton.addEventListener('click', async(event)=>{
     event.preventDefault();
+    let errorLab=document.getElementById("email-error")
+    errorLab.innerHTML="";
 
     let newEmail = document.getElementById("email-signup").value;
     let newPass = document.getElementById("pass-signup").value;
@@ -63,9 +75,9 @@ newUserButton.addEventListener('click', async(event)=>{
         last_name:lname,
         birthdate:birthdate
     }
-
+    console.log(userInfo);
     let json = JSON.stringify(userInfo);
-
+    console.log(userInfo);
     try {
 
         const raw_response = await fetch(`http://localhost:8080/user`,{
@@ -87,11 +99,19 @@ newUserButton.addEventListener('click', async(event)=>{
         })
     
         setTimeout( ()=>{
-            window.location.replace("home.html")
+            window.location.replace("../home/home.html")
         }, 1000 )
     
     
     }catch(error){
+        if (error=="Error: 406"){
+            errorLab.innerHTML = "Email already taken."
+        } else if (error== "Error: 404"){
+            errorLab.innerHTML = "Database error, please try again."
+        } else if (error=="Error:400"){
+            errorLab.innerHTML="Character tokens not accepted"
+        }
+
         console.log(error)
     }
 

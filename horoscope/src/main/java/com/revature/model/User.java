@@ -7,6 +7,25 @@ public class User {
     String password;
     int id;
     String birthdate;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                ", birthdate='" + birthdate + '\'' +
+                ", wzodiac_Display='" + wzodiac_Display + '\'' +
+                ", czodiac_Display='" + czodiac_Display + '\'' +
+                ", wzodiac=" + wzodiac +
+                ", czodiac=" + czodiac +
+                ", mood='" + mood + '\'' +
+                ", czDescription='" + czDescription + '\'' +
+                '}';
+    }
+
     String wzodiac_Display;
     String czodiac_Display;
     int wzodiac;

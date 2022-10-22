@@ -11,8 +11,7 @@ public class UserService {
     }
 
     public User getUserByEmail(User user){
-        user = setDisplays(user);
-        return uR.getUser(user);}
+        return setDisplays(uR.getUser(user));}
 
     public User createUser(User user){
         user = setFKs(user);
@@ -27,10 +26,13 @@ public class UserService {
         else{
             String bdate = user.getBirthdate();
             String[] ymd = bdate.split("-");
-            setWZodiacFK(ymd, user);
-            setCZodiacFK(ymd, user);
+            user = setWZodiacFK(ymd, user);
+            user = setCZodiacFK(ymd, user);
+
+            return user;
         }
-        return user;
+
+
     }
 
     private User setDisplays(User user){
@@ -39,11 +41,10 @@ public class UserService {
             user = uR.getWSignDisplay(user);
         if(user.getCzodiac()>0 && user.getCzodiac()<13)
             user = uR.getCSignDisplay(user);
-
         return user;
     }
 
-    private void setWZodiacFK(String[] ymd,User user){
+    private User setWZodiacFK(String[] ymd,User user){
         //int yearNum = Integer.parseInt(ymd[0]);
         int month = Integer.parseInt(ymd[1]);
         int day = Integer.parseInt(ymd[2]);
@@ -125,15 +126,17 @@ public class UserService {
             else
                 user.setWzodiac(9);
         }
+        return user;
     }
 
-    private void setCZodiacFK(String[] ymd,User user){
+    private User setCZodiacFK(String[] ymd,User user){
        int[] ZODIAC = {1900, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911};
        int year = Integer.parseInt(ymd[0]);
         for (int i=0; i< ZODIAC.length;i++) {
             if ((year - ZODIAC[i]) %12 == 0)
                 user.setCzodiac(i+1);
         }
+        return user;
     }
 
 }

@@ -23,6 +23,7 @@ p{
     overflow: hidden;
     position: relative;
     margin:50px auto;
+    visibility: hidden;
   }
   
   .barcontainer{
@@ -41,15 +42,6 @@ p{
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 80%;
     box-sizing: border-box;
-    animation: grow 1.5s ease-out forwards;
     transform-origin: bottom;
   }
-  @keyframes grow{
-    from{
-      transform: scaleY(0);
-    }
-  }
-    
-  

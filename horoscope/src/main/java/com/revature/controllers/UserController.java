@@ -22,13 +22,17 @@ public class UserController {
 
     public Handler createNewUser = context -> {
         User user = context.bodyAsClass(User.class);
-
         if (user!=null) {
             user = userService.createUser(user);
             if (user.getId()>0){
+                System.out.println("Returned user: " + user);
                 context.json(user);
             } else {
-                context.result("Something went wrong").status(400);
+                if (user.getId()==-1){
+                    context.result("Email already taken.").status(406);
+                } else {
+                    context.result("Something went wrong").status(404);
+                }
             }
         } else {
             context.result("Not a valid user").status(400);
@@ -43,9 +47,11 @@ public class UserController {
             if (userToCompare!=null){
                 if (user.getPassword().equals(userToCompare.getPassword())){
                     context.json(userToCompare);
+                } else {
+                    context.result("Username/password not correct").status(406);
                 }
             } else {
-                context.result("User does not exist").status(400);
+                context.result("User does not exist").status(404);
             }
         } else {
             context.result("Not a valid user").status(400);
@@ -63,10 +69,10 @@ public class UserController {
                 if(userService.updateMood(userToCompare)){
                     context.result("Mood updated.").status(200);
                 } else{
-                    context.result("Error with database.").status(400);
+                    context.result("Error with database.").status(406);
                 }
             }else{
-                context.result("Can't find user.").status(400);
+                context.result("Can't find user.").status(404);
             }
         }else{
             context.result("Not a valid user").status(400);

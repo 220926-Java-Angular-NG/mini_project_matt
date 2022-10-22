@@ -8,10 +8,10 @@
     <title>The STARS</title>
 </head>
 <body>
+    <button id="logout" class="logout">Log Out</button>
     <div class="headers"> 
         <h1>Guidance by the STARS!</h1>
-        <button id = "mood">Get Mood</button>
-        <br>
+
     </div>
     <div class = "textcontainer">
     <div>
@@ -23,22 +23,21 @@
         <h2 class="headers" id="chinese-head"></h2>
         <p id="chinese"></p>
     </div>
-    <br>
+    <br>    
     <div>
         <h2 class="headers" id="western-head"></h2>
         <p id="western"></p>
     </div>
     </div>
-    <div id="moodBox">
 
+    <br>
+    <br>
+    <div class="headers">
+        <button id = "mood" sytle.text-align="center">Get Mood</button>
+        <br>
+        <label id="mood-error"></label>
     </div>
-    <label>Birthday: </label>
-    <input id="bdate" type="date">
-    <br>
-    <button id="submit" type="submit">Submit</button>
-    <br>
-    <br>
-
+    <p id="moodBox"></p>
     <div class="container" id = "topInt">
         <div class="barcontainer">
           <div class="bar" id = "intensity">

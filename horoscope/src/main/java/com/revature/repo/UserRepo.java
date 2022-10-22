@@ -40,10 +40,9 @@ public class UserRepo {
     }
 
     public User createUser(User user){
-        String sql = "INSERT INTO users (email, _password, birthday, czodiak_fk, wzodiak_fk, firstname, lastname) " +
-                "VALUES (?,?,?,?,?,?,?)";
-
         try{
+            String sql = "INSERT INTO users (email, _password, birthdate, czodiac_fk, wzodiac_fk, firstname, lastname) " +
+                    "VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, user.getEmail());
@@ -57,16 +56,21 @@ public class UserRepo {
 
             //gives row that was just created
             ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            user.setId(rs.getInt("id"));
 
-            while(rs.next()){
-                user.setId(rs.getInt("id"));
-            }
             return user;
         } catch (SQLException|NullPointerException ex) {
             String excMsg = ex.getMessage();
-            if (excMsg.contains("users_email_key"))
+            if (excMsg.contains("users_email_key")) {
                 user.setId(-1);
                 return user;
+            }else{
+                user.setId(0);
+                System.out.println(excMsg);
+                return user;
+
+            }
         }
     }
 
@@ -95,6 +99,7 @@ public class UserRepo {
             while (rs.next()){
                 user.setWzodiac_Display(rs.getString("sunsign"));
             }
+
             return user;
 
         } catch (SQLException sqlException){
@@ -108,12 +113,14 @@ public class UserRepo {
             String sql = "SELECT * FROM czodiac WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, user.getCzodiac());
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
                 user.setCzodiac_Display(rs.getString("animal"));
                 user.setCzDescription(rs.getString("description"));
             }
+
             return user;
 
         } catch (SQLException sqlException){
